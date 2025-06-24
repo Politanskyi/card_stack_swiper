@@ -1,3 +1,7 @@
+## [1.0.0+3]
+
+### Fixed
+- Update version to 1.0.0+2 and improve code formatting for constructors
 
 ## [1.0.0+2]
 
