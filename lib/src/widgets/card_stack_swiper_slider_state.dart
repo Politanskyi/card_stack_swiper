@@ -74,7 +74,7 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
         scale: widget.backCardScale,
         visibility: 1,
       ),
-      CardStackSwiperStatus.top: CardSettings(
+      CardStackSwiperStatus.top: const CardSettings(
         angle: 0,
         position: Offset.zero,
         scale: 1,
@@ -124,15 +124,13 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
       final CardStackSwiperDirection direction;
 
       if (_sliderAnimation.dragPosition.dx.abs() > _sliderAnimation.dragPosition.dy.abs()) {
-        direction =
-            _sliderAnimation.dragPosition.dx.isNegative
-                ? CardStackSwiperDirection.left
-                : CardStackSwiperDirection.right;
+        direction = _sliderAnimation.dragPosition.dx.isNegative
+            ? CardStackSwiperDirection.left
+            : CardStackSwiperDirection.right;
       } else {
-        direction =
-            _sliderAnimation.dragPosition.dy.isNegative
-                ? CardStackSwiperDirection.top
-                : CardStackSwiperDirection.bottom;
+        direction = _sliderAnimation.dragPosition.dy.isNegative
+            ? CardStackSwiperDirection.top
+            : CardStackSwiperDirection.bottom;
       }
 
       _swipe(direction);
@@ -245,10 +243,9 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
     final int verticalPercentage = _getSwipePercentage(_sliderAnimation.dragPosition.dy);
 
     return Transform(
-      transform:
-          Matrix4.identity()
-            ..translate(_sliderAnimation.dragPosition.dx, _sliderAnimation.dragPosition.dy)
-            ..rotateZ(_sliderAnimation.dragAngle),
+      transform: Matrix4.identity()
+        ..translate(_sliderAnimation.dragPosition.dx, _sliderAnimation.dragPosition.dy)
+        ..rotateZ(_sliderAnimation.dragAngle),
       alignment: Alignment.center,
       child: GestureDetector(
         onPanUpdate: _onPanUpdate,

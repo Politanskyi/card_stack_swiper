@@ -61,13 +61,16 @@ class _ExamplePageState extends State<ExamplePage> {
                   initialIndex: 0,
                   isLoop: true,
                   onSwipe: (previousIndex, currentIndex, direction) {
-                    debugPrint('Swiped from $previousIndex to $currentIndex in $direction direction');
+                    debugPrint(
+                        'Swiped from $previousIndex to $currentIndex in $direction direction');
                     return true;
                   },
                   onEnd: () {
                     debugPrint('Reached end of the stack');
                   },
-                  cardBuilder: (context, index, horizontalPercentage, verticalPercentage) => _cards[index],
+                  cardBuilder: (context, index, horizontalPercentage,
+                          verticalPercentage) =>
+                      _cards[index],
                 ),
               ),
               const SizedBox(height: 20),
@@ -81,12 +84,14 @@ class _ExamplePageState extends State<ExamplePage> {
                   ),
                   FloatingActionButton(
                     heroTag: 'left',
-                    onPressed: () => _controller.swipe(CardStackSwiperDirection.left),
+                    onPressed: () =>
+                        _controller.swipe(CardStackSwiperDirection.left),
                     child: const Icon(Icons.keyboard_arrow_left),
                   ),
                   FloatingActionButton(
                     heroTag: 'right',
-                    onPressed: () => _controller.swipe(CardStackSwiperDirection.right),
+                    onPressed: () =>
+                        _controller.swipe(CardStackSwiperDirection.right),
                     child: const Icon(Icons.keyboard_arrow_right),
                   ),
                 ],

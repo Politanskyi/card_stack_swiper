@@ -1,8 +1,12 @@
 name: card_stack_swiper
+
 description: A highly customizable and smooth card stack swiper widget for Flutter, supporting interactive gestures and programmatic control.
-version: 1.0.0
+
 homepage: https://github.com/Politanskyi/card_stack_swiper
+
 issue_tracker: https://github.com/Politanskyi/card_stack_swiper/issues
+
+version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
