@@ -8,7 +8,11 @@ import '../properties/allowed_swipe_direction.dart';
 /// A helper class to manage the card's animation state, including its
 /// position, angle, and progress during various animations.
 class CardAnimation {
-  CardAnimation({required this.controller, required this.maxAngle, this.onSwipeDirectionChanged});
+  CardAnimation({
+    required this.controller,
+    required this.maxAngle,
+    this.onSwipeDirectionChanged,
+  });
 
   /// The animation controller that drives all animations.
   final AnimationController controller;

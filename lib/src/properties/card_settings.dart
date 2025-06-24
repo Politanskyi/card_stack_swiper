@@ -3,7 +3,13 @@ import 'dart:ui';
 /// A data class that holds the visual properties of a card in the stack.
 class CardSettings {
   /// Creates a new instance of card settings.
-  const CardSettings({this.angle = 0, this.position, this.scale, this.visibility = 1, this.draggable = false});
+  const CardSettings({
+    this.angle = 0,
+    this.position,
+    this.scale,
+    this.visibility = 1,
+    this.draggable = false,
+  });
 
   /// The rotation angle of the card in radians.
   final double angle;
