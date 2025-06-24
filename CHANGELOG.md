@@ -4,15 +4,11 @@
 ### Fixed
 - Update version to 1.0.0+2 and improve code formatting for constructors
 
----
-
 ## [1.0.0+1]
 
 ### Changed
 - Refactored internal code for improved readability and consistency.
 - Optimized gesture handling logic in `_onPanEnd` and `_onPanUpdate`.
-
----
 
 ## [1.0.0]
 
