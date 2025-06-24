@@ -34,32 +34,54 @@ class CardAnimation {
 
   double get _maxAngleInRadian => maxAngle * (math.pi / 180);
 
+  /// Calculates the permitted drag delta based on the allowed directions.
+  Offset _getPermittedDelta(
+    DragUpdateDetails details,
+    AllowedSwipeDirection allowedDirection,
+  ) {
+    double dx = 0;
+    double dy = 0;
+
+    final bool isMovingLeft = details.delta.dx < 0;
+    final bool isMovingRight = details.delta.dx > 0;
+    final bool isMovingUp = details.delta.dy < 0;
+    final bool isMovingDown = details.delta.dy > 0;
+
+    // As you correctly pointed out, we can combine the conditions.
+    // If movement is allowed left AND the user moves left, OR
+    // if movement is allowed right AND the user moves right, then we apply the horizontal delta.
+    if ((allowedDirection.left && isMovingLeft) || (allowedDirection.right && isMovingRight)) {
+      dx = details.delta.dx;
+    }
+
+    // Same logic for the vertical axis.
+    if ((allowedDirection.up && isMovingUp) || (allowedDirection.down && isMovingDown)) {
+      dy = details.delta.dy;
+    }
+
+    return Offset(dx, dy);
+  }
+
   /// Updates the drag position and angle based on the user's gesture.
   void updateDrag({
     required BuildContext context,
     required DragUpdateDetails details,
     required AllowedSwipeDirection allowedDirection,
   }) {
-    final double dx =
-        (allowedDirection.left && details.delta.dx < 0) || (allowedDirection.right && details.delta.dx > 0)
-            ? details.delta.dx
-            : 0;
-    final double dy = (allowedDirection.up && details.delta.dy < 0) || (allowedDirection.down && details.delta.dy > 0)
-        ? details.delta.dy
-        : 0;
+    final Offset delta = _getPermittedDelta(details, allowedDirection);
 
-    if (dx == 0 && dy == 0) return;
+    if (delta == Offset.zero) return;
 
-    dragPosition += Offset(dx, dy);
+    dragPosition += delta;
     dragAngle = (_maxAngleInRadian * dragPosition.dx / (MediaQuery.sizeOf(context).width / 2)).clamp(
       -_maxAngleInRadian,
       _maxAngleInRadian,
     );
 
-    if (dx.abs() > dy.abs()) {
-      onSwipeDirectionChanged?.call(dx > 0 ? CardStackSwiperDirection.right : CardStackSwiperDirection.left);
-    } else if (dy.abs() > dx.abs()) {
-      onSwipeDirectionChanged?.call(dy > 0 ? CardStackSwiperDirection.bottom : CardStackSwiperDirection.top);
+    if (delta.dx.abs() > delta.dy.abs()) {
+      onSwipeDirectionChanged?.call(delta.dx > 0 ? CardStackSwiperDirection.right : CardStackSwiperDirection.left);
+    } else if (delta.dy.abs() > delta.dx.abs()) {
+      onSwipeDirectionChanged?.call(delta.dy > 0 ? CardStackSwiperDirection.bottom : CardStackSwiperDirection.top);
     }
   }
 
@@ -81,12 +103,19 @@ class CardAnimation {
       CardStackSwiperDirection.none => Offset.zero,
     };
 
-    final Animation<double> swipeAnimation = controller.drive(CurveTween(curve: Curves.easeIn));
+    final Animation<double> swipeAnimation = controller.drive(
+      CurveTween(curve: Curves.easeIn),
+    );
+
     final Animation<Offset> positionAnimation = Tween<Offset>(
       begin: dragPosition,
       end: endPosition,
     ).animate(swipeAnimation);
-    final Animation<double> progressAnimation = Tween<double>(begin: 0, end: 1).animate(swipeAnimation);
+
+    final Animation<double> progressAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(swipeAnimation);
 
     void animationListener() {
       dragPosition = positionAnimation.value;
@@ -119,11 +148,16 @@ class CardAnimation {
     };
 
     final Animation<double> undoAnimation = controller.drive(CurveTween(curve: Curves.easeOut));
+
     final Animation<Offset> positionAnimation = Tween<Offset>(
       begin: startPosition,
       end: Offset.zero,
     ).animate(undoAnimation);
-    final Animation<double> progressAnimation = Tween<double>(begin: 1, end: 0).animate(undoAnimation);
+
+    final Animation<double> progressAnimation = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(undoAnimation);
 
     void animationListener() {
       dragPosition = positionAnimation.value;
@@ -150,7 +184,11 @@ class CardAnimation {
       begin: dragPosition,
       end: Offset.zero,
     ).animate(returnAnimation);
-    final Animation<double> angleAnimation = Tween<double>(begin: dragAngle, end: 0).animate(returnAnimation);
+
+    final Animation<double> angleAnimation = Tween<double>(
+      begin: dragAngle,
+      end: 0,
+    ).animate(returnAnimation);
 
     void animationListener() {
       dragPosition = positionAnimation.value;

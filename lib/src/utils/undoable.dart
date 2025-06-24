@@ -1,7 +1,10 @@
 /// A generic wrapper for a value that keeps a history of its previous states.
 /// Enables undo functionality.
 class Undoable<T> {
-  Undoable(this._value, {Undoable<T>? previousValue}) : _previous = previousValue;
+  Undoable(
+    this._value, {
+    Undoable<T>? previousValue,
+  }) : _previous = previousValue;
 
   T _value;
   Undoable<T>? _previous;

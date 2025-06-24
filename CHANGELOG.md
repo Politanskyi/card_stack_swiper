@@ -1,3 +1,9 @@
+## [1.0.0+4]
+
+### Changed
+- Refactor drag update logic in card_animation.dart for improved readability and maintainability;
+- Update version to 1.0.0+4 and document changes in CHANGELOG.md
+
 ## [1.0.0+3]
 
 ### Fixed
