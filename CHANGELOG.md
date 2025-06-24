@@ -1,7 +1,7 @@
 ## [1.0.0+3]
 
 ### Fixed
-- Update version to 1.0.0+2 and improve code formatting for constructors
+- Update version to 1.0.0+3 and document changes in CHANGELOG.md
 
 ## [1.0.0+2]
 
