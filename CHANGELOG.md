@@ -2,10 +2,7 @@
 ## [1.0.0+2]
 
 ### Fixed
-- Corrected a bug where the front card would disappear when `isDisabled` was set to true.
-- Fixed an issue where the `undo` action was unavailable after the stack was exhausted.
-- Corrected the logical order in the `_swipe` method to check for `onSwipe` permission before the animation starts.
-- Corrected the `assert` for `initialIndex` to safely handle cases where `cardsCount` is 0.
+- Update version to 1.0.0+2 and improve code formatting for constructors
 
 ---
 
