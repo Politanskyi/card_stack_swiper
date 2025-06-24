@@ -23,9 +23,9 @@ We built this package because we wanted to:
 
 ## Show Cases
 
-| Swipe in any direction | Programmatic Swipes | Undo a Swipe |
-| ---------------------- | :------------- | :---------------- |
-| <img src="https://github.com/Politanskyi/card_stack_swiper/blob/main/images/swipe_in_any_direction.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/main/images/trigger_swipes.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/main/images/unswipe_the_cards.gif?raw=true" height="275" /> 
+| Swipe in any direction                                                                                                             | Programmatic Swipes | Undo a Swipe |
+|------------------------------------------------------------------------------------------------------------------------------------| :------------- | :---------------- |
+| <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/swipe_in_any_direction.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/trigger_swipes.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/unswipe_the_cards.gif?raw=true" height="275" /> 
 
 ## Installation
 
