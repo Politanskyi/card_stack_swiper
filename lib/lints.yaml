@@ -1,0 +1,60 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - cancel_subscriptions
+    - avoid_types_as_parameter_names
+    - file_names
+    - avoid_catching_errors
+    - directives_ordering
+    - prefer_single_quotes
+    - avoid_dynamic_calls
+    - sort_constructors_first
+    - prefer_asserts_with_message
+    - use_string_buffers
+    - avoid_type_to_string
+    - close_sinks
+    - literal_only_boolean_expressions
+    - no_self_assignments
+    - test_types_in_equals
+    - throw_in_finally
+    - unnecessary_statements
+    - always_declare_return_types
+    - avoid_bool_literals_in_conditional_expressions
+    - avoid_classes_with_only_static_members
+    - avoid_multiple_declarations_per_line
+    - avoid_unused_constructor_parameters
+    - avoid_void_async
+    - combinators_ordering
+    - eol_at_end_of_file
+    - leading_newlines_in_multiline_strings
+    - library_names
+    - matching_super_parameters
+    - no_literal_bool_comparisons
+    - only_throw_errors
+    - prefer_final_in_for_each
+    - prefer_final_locals
+    - prefer_if_elements_to_conditional_expressions
+    - prefer_null_aware_method_calls
+    - sized_box_shrink_expand
+    - type_annotate_public_apis
+    - unnecessary_await_in_return
+    - unnecessary_breaks
+    - unnecessary_raw_strings
+    - unreachable_from_main
+    - use_colored_box
+    - use_enums
+    - use_named_constants
+    - use_raw_strings
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - require_trailing_commas
+
+analyzer:
+  exclude:
+  errors:
+    invalid_annotation_target: ignore
+
+formatter:
+  page_width: 120
+  trailing_commas: preserve
