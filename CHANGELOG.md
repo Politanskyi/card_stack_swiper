@@ -1,7 +1,13 @@
+## [1.0.1]
+
+### Changed
+- Refactored code for improved readability and maintainability
+- Update version to 1.0.1
+
 ## [1.0.0+4]
 
 ### Changed
-- Refactor drag update logic in card_animation.dart for improved readability and maintainability;
+- Refactor drag update logic in card_animation.dart for improved readability and maintainability
 - Update version to 1.0.0+4 and document changes in CHANGELOG.md
 
 ## [1.0.0+3]
@@ -18,19 +24,19 @@
 
 ### Changed
 - Refactored internal code for improved readability and consistency.
-- Optimized gesture handling logic in `_onPanEnd` and `_onPanUpdate`.
+- Optimized gesture handling logic in `_onPanEnd` and `_onPanUpdate`
 
 ## [1.0.0]
 
 ### Added
-- Initial release of the `card_stack_swiper` package.
-- Swiping in all four directions (left, right, top, bottom) with `AllowedSwipeDirection`.
-- Programmatic control via `CardStackSwiperController` (`swipe`, `undo`, `moveTo`).
-- A comprehensive suite of callbacks: `onSwipe`, `onUndo`, `onEnd`, `onPressed`.
-- Real-time swipe direction tracking with `onSwipeDirectionChange`.
-- `isDisabled` and `onTapDisabled` properties to control user interaction.
-- `initialIndex` property to start the stack at a specific card.
-- `isLoop` property for infinite scrolling.
-- `cardBuilder` now provides `horizontalOffsetPercentage` and `verticalOffsetPercentage` for creating interactive cards.
-- Performance optimization using `AnimatedBuilder` to prevent unnecessary widget rebuilds.
-- Full Dartdoc documentation for the public API.
+- Initial release of the `card_stack_swiper` package
+- Swiping in all four directions (left, right, top, bottom) with `AllowedSwipeDirection`
+- Programmatic control via `CardStackSwiperController` (`swipe`, `undo`, `moveTo`)
+- A comprehensive suite of callbacks: `onSwipe`, `onUndo`, `onEnd`, `onPressed`
+- Real-time swipe direction tracking with `onSwipeDirectionChange`
+- `isDisabled` and `onTapDisabled` properties to control user interaction
+- `initialIndex` property to start the stack at a specific card
+- `isLoop` property for infinite scrolling
+- `cardBuilder` now provides `horizontalOffsetPercentage` and `verticalOffsetPercentage` for creating interactive cards
+- Performance optimization using `AnimatedBuilder` to prevent unnecessary widget rebuilds
+- Full Dartdoc documentation for the public API

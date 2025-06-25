@@ -6,7 +6,7 @@ homepage: https://github.com/Politanskyi/card_stack_swiper
 
 issue_tracker: https://github.com/Politanskyi/card_stack_swiper/issues
 
-version: 1.0.0+4
+version: 1.0.1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"

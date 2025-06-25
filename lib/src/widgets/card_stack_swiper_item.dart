@@ -5,7 +5,11 @@ import '../properties/card_settings.dart';
 /// A wrapper widget that applies the visual transformations (position, scale, rotation, opacity)
 /// from a [CardSettings] object to its child widget.
 class CardStackSwiperItem extends StatelessWidget {
-  const CardStackSwiperItem({super.key, required this.child, required this.settings});
+  const CardStackSwiperItem({
+    super.key,
+    required this.child,
+    required this.settings,
+  });
 
   /// The widget to which the transformations will be applied.
   final Widget child;
@@ -32,7 +36,11 @@ class CardStackSwiperItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Opacity(
       opacity: settings.visibility,
-      child: Transform(transform: _computeTransform(), alignment: Alignment.center, child: child),
+      child: Transform(
+        transform: _computeTransform(),
+        alignment: Alignment.center,
+        child: child,
+      ),
     );
   }
 }

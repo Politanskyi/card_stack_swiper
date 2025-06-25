@@ -21,7 +21,8 @@ class CardAnimation {
   final double maxAngle;
 
   /// A callback that is triggered when the swipe direction changes during a drag.
-  final void Function(CardStackSwiperDirection direction)? onSwipeDirectionChanged;
+  final void Function(CardStackSwiperDirection direction)?
+      onSwipeDirectionChanged;
 
   /// The current pixel offset of the card from the center due to dragging.
   Offset dragPosition = Offset.zero;
@@ -50,12 +51,14 @@ class CardAnimation {
     // As you correctly pointed out, we can combine the conditions.
     // If movement is allowed left AND the user moves left, OR
     // if movement is allowed right AND the user moves right, then we apply the horizontal delta.
-    if ((allowedDirection.left && isMovingLeft) || (allowedDirection.right && isMovingRight)) {
+    if ((allowedDirection.left && isMovingLeft) ||
+        (allowedDirection.right && isMovingRight)) {
       dx = details.delta.dx;
     }
 
     // Same logic for the vertical axis.
-    if ((allowedDirection.up && isMovingUp) || (allowedDirection.down && isMovingDown)) {
+    if ((allowedDirection.up && isMovingUp) ||
+        (allowedDirection.down && isMovingDown)) {
       dy = details.delta.dy;
     }
 
@@ -73,15 +76,26 @@ class CardAnimation {
     if (delta == Offset.zero) return;
 
     dragPosition += delta;
-    dragAngle = (_maxAngleInRadian * dragPosition.dx / (MediaQuery.sizeOf(context).width / 2)).clamp(
+    dragAngle = (_maxAngleInRadian *
+            dragPosition.dx /
+            (MediaQuery.sizeOf(context).width / 2))
+        .clamp(
       -_maxAngleInRadian,
       _maxAngleInRadian,
     );
 
     if (delta.dx.abs() > delta.dy.abs()) {
-      onSwipeDirectionChanged?.call(delta.dx > 0 ? CardStackSwiperDirection.right : CardStackSwiperDirection.left);
+      onSwipeDirectionChanged?.call(
+        delta.dx > 0
+            ? CardStackSwiperDirection.right
+            : CardStackSwiperDirection.left,
+      );
     } else if (delta.dy.abs() > delta.dx.abs()) {
-      onSwipeDirectionChanged?.call(delta.dy > 0 ? CardStackSwiperDirection.bottom : CardStackSwiperDirection.top);
+      onSwipeDirectionChanged?.call(
+        delta.dy > 0
+            ? CardStackSwiperDirection.bottom
+            : CardStackSwiperDirection.top,
+      );
     }
   }
 
@@ -96,10 +110,22 @@ class CardAnimation {
     final Size screenSize = MediaQuery.sizeOf(context);
 
     final Offset endPosition = switch (direction) {
-      CardStackSwiperDirection.left => Offset(-screenSize.width * 1.2, dragPosition.dy * 2),
-      CardStackSwiperDirection.right => Offset(screenSize.width * 1.2, dragPosition.dy * 2),
-      CardStackSwiperDirection.top => Offset(dragPosition.dx * 2, -screenSize.height),
-      CardStackSwiperDirection.bottom => Offset(dragPosition.dx * 2, screenSize.height),
+      CardStackSwiperDirection.left => Offset(
+          -screenSize.width * 1.2,
+          dragPosition.dy * 2,
+        ),
+      CardStackSwiperDirection.right => Offset(
+          screenSize.width * 1.2,
+          dragPosition.dy * 2,
+        ),
+      CardStackSwiperDirection.top => Offset(
+          dragPosition.dx * 2,
+          -screenSize.height,
+        ),
+      CardStackSwiperDirection.bottom => Offset(
+          dragPosition.dx * 2,
+          screenSize.height,
+        ),
       CardStackSwiperDirection.none => Offset.zero,
     };
 
@@ -147,7 +173,11 @@ class CardAnimation {
       CardStackSwiperDirection.none => Offset.zero,
     };
 
-    final Animation<double> undoAnimation = controller.drive(CurveTween(curve: Curves.easeOut));
+    final Animation<double> undoAnimation = controller.drive(
+      CurveTween(
+        curve: Curves.easeOut,
+      ),
+    );
 
     final Animation<Offset> positionAnimation = Tween<Offset>(
       begin: startPosition,
@@ -176,10 +206,17 @@ class CardAnimation {
 
   /// Starts an animation to return the card to the center of the stack.
   /// Used when a drag is released before the swipe threshold is met.
-  Future<void> animateBackToCenter({required BuildContext context, required Duration duration}) async {
+  Future<void> animateBackToCenter({
+    required BuildContext context,
+    required Duration duration,
+  }) async {
     controller.duration = duration;
 
-    final Animation<double> returnAnimation = controller.drive(CurveTween(curve: Curves.easeOut));
+    final Animation<double> returnAnimation = controller.drive(
+      CurveTween(
+        curve: Curves.easeOut,
+      ),
+    );
     final Animation<Offset> positionAnimation = Tween<Offset>(
       begin: dragPosition,
       end: Offset.zero,

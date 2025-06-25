@@ -1,6 +1,7 @@
 part of 'card_stack_swiper.dart';
 
-class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderStateMixin {
+class _CardStackSwiperState extends State<CardStackSwiper>
+    with TickerProviderStateMixin {
   final Queue<CardStackSwiperDirection> _directionHistory = Queue();
 
   late final Map<CardStackSwiperStatus, CardSettings> _sliderSettings;
@@ -11,12 +12,14 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
 
   StreamSubscription<ControllerEvent>? _controllerSubscription;
 
-  CardStackSwiperDirection _detectedHorizontalDirection = CardStackSwiperDirection.none;
-  CardStackSwiperDirection _detectedVerticalDirection = CardStackSwiperDirection.none;
+  CardStackSwiperDirection _detectedHorizontalDirection =
+      CardStackSwiperDirection.none;
+  CardStackSwiperDirection _detectedVerticalDirection =
+      CardStackSwiperDirection.none;
 
   int? get _currentIndex => _undoableIndex.state;
   int get _cardsCount => widget.cardsCount;
-  bool get _canSwipe => _currentIndex != null && !widget.isDisabled;
+  bool get _canSwipe => _currentIndex != null;
 
   @override
   void initState() {
@@ -32,7 +35,9 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
       onSwipeDirectionChanged: _onSwipeDirectionChanged,
     );
 
-    _controllerSubscription = widget.controller?.events.listen(_onControllerEvent);
+    _controllerSubscription = widget.controller?.events.listen(
+      _onControllerEvent,
+    );
 
     super.initState();
   }
@@ -61,7 +66,10 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
 
   void _updateSliderSettings() {
     _sliderSettings = {
-      CardStackSwiperStatus.invisible: CardSettings(scale: widget.backCardScale - 0.1, visibility: 0),
+      CardStackSwiperStatus.invisible: CardSettings(
+        scale: widget.backCardScale - 0.1,
+        visibility: 0,
+      ),
       CardStackSwiperStatus.start: CardSettings(
         angle: widget.backCardAngle,
         position: widget.backCardOffset,
@@ -99,7 +107,9 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
-    if (_animationController.isAnimating || !_canSwipe) return;
+    if (_animationController.isAnimating || widget.isDisabled || !_canSwipe) {
+      return;
+    }
 
     setState(
       () => _sliderAnimation.updateDrag(
@@ -111,19 +121,23 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
   }
 
   Future<void> _onPanEnd(DragEndDetails details) async {
-    if (_animationController.isAnimating || !_canSwipe) return;
+    if (_animationController.isAnimating || widget.isDisabled || !_canSwipe) {
+      return;
+    }
 
     final Size screenSize = MediaQuery.sizeOf(context);
     final double thresholdValue = (screenSize.width * widget.threshold) / 100;
 
-    final bool swipedHorizontally = _sliderAnimation.dragPosition.dx.abs() > thresholdValue;
-    final bool swipedVertically =
-        _sliderAnimation.dragPosition.dy.abs() > thresholdValue * widget.verticalSwipeThresholdMultiplier;
+    final bool swipedHorizontally =
+        _sliderAnimation.dragPosition.dx.abs() > thresholdValue;
+    final bool swipedVertically = _sliderAnimation.dragPosition.dy.abs() >
+        thresholdValue * widget.verticalSwipeThresholdMultiplier;
 
     if ((swipedHorizontally || swipedVertically) && _canSwipe) {
       final CardStackSwiperDirection direction;
 
-      if (_sliderAnimation.dragPosition.dx.abs() > _sliderAnimation.dragPosition.dy.abs()) {
+      if (_sliderAnimation.dragPosition.dx.abs() >
+          _sliderAnimation.dragPosition.dy.abs()) {
         direction = _sliderAnimation.dragPosition.dx.isNegative
             ? CardStackSwiperDirection.left
             : CardStackSwiperDirection.right;
@@ -135,7 +149,10 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
 
       _swipe(direction);
     } else {
-      await _sliderAnimation.animateBackToCenter(context: context, duration: widget.returnAnimationDuration);
+      await _sliderAnimation.animateBackToCenter(
+        context: context,
+        duration: widget.returnAnimationDuration,
+      );
     }
   }
 
@@ -143,22 +160,35 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
     if (_animationController.isAnimating || !_canSwipe) return;
 
     final int oldIndex = _getActualIndex(_currentIndex!);
-    final int? nextIndex =
-        widget.isLoop || _currentIndex! + 1 < _cardsCount ? _getActualIndex(_currentIndex! + 1) : null;
+    final int? nextIndex = widget.isLoop || _currentIndex! + 1 < _cardsCount
+        ? _getActualIndex(_currentIndex! + 1)
+        : null;
     final bool isLastCard = !widget.isLoop && nextIndex == null;
-    final bool canSwipe = await widget.onSwipe?.call(oldIndex, nextIndex, direction) ?? true;
+    final bool canSwipe = await widget.onSwipe?.call(
+          oldIndex,
+          nextIndex,
+          direction,
+        ) ??
+        true;
 
     if (!canSwipe) {
       if (!mounted) return;
 
-      await _sliderAnimation.animateBackToCenter(context: context, duration: widget.returnAnimationDuration);
+      await _sliderAnimation.animateBackToCenter(
+        context: context,
+        duration: widget.returnAnimationDuration,
+      );
 
       return;
     }
 
     if (!mounted) return;
 
-    await _sliderAnimation.swipe(context: context, direction: direction, duration: widget.swipeAnimationDuration);
+    await _sliderAnimation.swipe(
+      context: context,
+      direction: direction,
+      duration: widget.swipeAnimationDuration,
+    );
 
     setState(() {
       _undoableIndex.state = nextIndex;
@@ -177,7 +207,12 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
 
     final CardStackSwiperDirection lastDirection = _directionHistory.last;
     final int? oldIndex = _currentIndex;
-    final bool canUndo = widget.onUndo?.call(oldIndex, newIndex, lastDirection) ?? true;
+    final bool canUndo = widget.onUndo?.call(
+          oldIndex,
+          newIndex,
+          lastDirection,
+        ) ??
+        true;
 
     if (!canUndo) return;
 
@@ -186,7 +221,11 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
       _undoableIndex.undo();
     });
 
-    await _sliderAnimation.undo(context: context, direction: lastDirection, duration: widget.returnAnimationDuration);
+    await _sliderAnimation.undo(
+      context: context,
+      direction: lastDirection,
+      duration: widget.returnAnimationDuration,
+    );
   }
 
   void _moveTo(int index) {
@@ -211,52 +250,90 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
         _detectedVerticalDirection = CardStackSwiperDirection.none;
     }
 
-    widget.onSwipeDirectionChange?.call(_detectedHorizontalDirection, _detectedVerticalDirection);
+    widget.onSwipeDirectionChange?.call(
+      _detectedHorizontalDirection,
+      _detectedVerticalDirection,
+    );
   }
 
   CardSettings _getSettingsFor(int localIndex) {
     final double t = _sliderAnimation.animationProgress;
 
-    CardSettings getSettings(CardStackSwiperStatus status) => _sliderSettings[status]!;
+    CardSettings getSettings(CardStackSwiperStatus status) {
+      return _sliderSettings[status]!;
+    }
 
     return switch (localIndex) {
       0 => getSettings(CardStackSwiperStatus.top),
-      1 => CardSettings.lerp(getSettings(CardStackSwiperStatus.end), getSettings(CardStackSwiperStatus.top), t)!,
-      2 => CardSettings.lerp(getSettings(CardStackSwiperStatus.start), getSettings(CardStackSwiperStatus.end), t)!,
-      3 =>
-        CardSettings.lerp(getSettings(CardStackSwiperStatus.invisible), getSettings(CardStackSwiperStatus.start), t)!,
+      1 => CardSettings.lerp(
+          getSettings(CardStackSwiperStatus.end),
+          getSettings(CardStackSwiperStatus.top),
+          t,
+        )!,
+      2 => CardSettings.lerp(
+          getSettings(CardStackSwiperStatus.start),
+          getSettings(CardStackSwiperStatus.end),
+          t,
+        )!,
+      3 => CardSettings.lerp(
+          getSettings(CardStackSwiperStatus.invisible),
+          getSettings(CardStackSwiperStatus.start),
+          t,
+        )!,
       _ => getSettings(CardStackSwiperStatus.invisible),
     };
   }
 
   int _getSwipePercentage(double dragPosition) {
-    final double thresholdValue = (MediaQuery.sizeOf(context).width * widget.threshold) / 100;
+    final Size screenSize = MediaQuery.sizeOf(context);
+    final double thresholdValue = (screenSize.width * widget.threshold) / 100;
 
-    return thresholdValue == 0 ? 0 : (100 * dragPosition / thresholdValue).ceil();
+    return switch (thresholdValue) {
+      0 => 0,
+      _ => (100 * dragPosition / thresholdValue).ceil(),
+    };
   }
 
   Widget _buildFrontCard(BoxConstraints constraints) {
     if (_currentIndex == null) return const SizedBox.shrink();
 
     final int index = _getActualIndex(_currentIndex!);
-    final int horizontalPercentage = _getSwipePercentage(_sliderAnimation.dragPosition.dx);
-    final int verticalPercentage = _getSwipePercentage(_sliderAnimation.dragPosition.dy);
+    final int horizontalPercentage = _getSwipePercentage(
+      _sliderAnimation.dragPosition.dx,
+    );
+    final int verticalPercentage = _getSwipePercentage(
+      _sliderAnimation.dragPosition.dy,
+    );
 
     return Transform(
       transform: Matrix4.identity()
-        ..translate(_sliderAnimation.dragPosition.dx, _sliderAnimation.dragPosition.dy)
+        ..translate(
+          _sliderAnimation.dragPosition.dx,
+          _sliderAnimation.dragPosition.dy,
+        )
         ..rotateZ(_sliderAnimation.dragAngle),
       alignment: Alignment.center,
       child: GestureDetector(
         onPanUpdate: _onPanUpdate,
         onPanEnd: _onPanEnd,
-        onTap: () async => widget.isDisabled ? await widget.onTapDisabled?.call() : widget.onPressed?.call(index),
+        onTap: () async {
+          if (widget.isDisabled) {
+            await widget.onTapDisabled?.call();
+          } else {
+            widget.onPressed?.call(index);
+          }
+        },
         child: ConstrainedBox(
           constraints: constraints,
           child: CardStackSwiperItem(
             settings: _getSettingsFor(0),
-            child:
-                widget.cardBuilder(context, index, horizontalPercentage, verticalPercentage) ?? const SizedBox.shrink(),
+            child: widget.cardBuilder(
+                  context,
+                  index,
+                  horizontalPercentage,
+                  verticalPercentage,
+                ) ??
+                const SizedBox.shrink(),
           ),
         ),
       ),
@@ -267,14 +344,20 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
     final List<Widget> cards = [];
 
     for (int index = 3; index >= 1; index--) {
-      if (_currentIndex != null && (_currentIndex! + index < _cardsCount || widget.isLoop)) {
+      if (_currentIndex != null &&
+          (_currentIndex! + index < _cardsCount || widget.isLoop)) {
         cards.add(
           ConstrainedBox(
             constraints: constraints,
             child: CardStackSwiperItem(
               settings: _getSettingsFor(index),
-              child:
-                  widget.cardBuilder(context, _getActualIndex(_currentIndex! + index), 0, 0) ?? const SizedBox.shrink(),
+              child: widget.cardBuilder(
+                    context,
+                    _getActualIndex(_currentIndex! + index),
+                    0,
+                    0,
+                  ) ??
+                  const SizedBox.shrink(),
             ),
           ),
         );
@@ -295,7 +378,10 @@ class _CardStackSwiperState extends State<CardStackSwiper> with TickerProviderSt
               clipBehavior: Clip.none,
               fit: StackFit.expand,
               alignment: Alignment.center,
-              children: [..._buildBackCards(constraints), _buildFrontCard(constraints)],
+              children: [
+                ..._buildBackCards(constraints),
+                _buildFrontCard(constraints),
+              ],
             );
           },
         );

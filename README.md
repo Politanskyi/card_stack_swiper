@@ -3,7 +3,6 @@
 [![Pub Version](https://img.shields.io/pub/v/card_stack_swiper?logo=dart&logoColor=white)](https://pub.dev/packages/card_stack_swiper)
 [![Pub Points](https://badgen.net/pub/points/card_stack_swiper)](https://pub.dev/packages/card_stack_swiper)
 [![Pub Likes](https://badgen.net/pub/likes/card_stack_swiper)](https://pub.dev/packages/card_stack_swiper)
-[![Pub popularity](https://badgen.net/pub/popularity/card_stack_swiper)](https://pub.dev/packages/card_stack_swiper)
 
 This is a Flutter package for a Stack card swiper. ✨
 
@@ -33,7 +32,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  card_stack_swiper: ^1.0.0
+  card_stack_swiper: ^1.0.1
 ```
 
 **OR** run this command in your project's root directory:
