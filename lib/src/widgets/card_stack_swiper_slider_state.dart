@@ -307,9 +307,11 @@ class _CardStackSwiperState extends State<CardStackSwiper>
 
     return Transform(
       transform: Matrix4.identity()
-        ..translate(
+        ..translateByDouble(
           _sliderAnimation.dragPosition.dx,
           _sliderAnimation.dragPosition.dy,
+          0,
+          1,
         )
         ..rotateZ(_sliderAnimation.dragAngle),
       alignment: Alignment.center,

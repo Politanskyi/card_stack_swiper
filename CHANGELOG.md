@@ -1,3 +1,10 @@
+## [1.0.2]
+
+### Changed
+- Increased MinimumOSVersion from 12.0 to 13.0 in `AppFrameworkInfo.plist`.
+- Updated `IPHONEOS_DEPLOYMENT_TARGET` from 12.0 to 13.0 in `project.pbxproj`.
+- Bumped version to 1.0.2 in `pubspec.yaml`.
+
 ## [1.0.1]
 
 ### Changed

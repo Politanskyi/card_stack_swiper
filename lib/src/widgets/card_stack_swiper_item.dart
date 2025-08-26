@@ -23,11 +23,15 @@ class CardStackSwiperItem extends StatelessWidget {
     final Offset? position = settings.position;
     final double? scale = settings.scale;
 
-    if (position != null) matrix.translate(position.dx, position.dy);
+    if (position != null) {
+      matrix.translateByDouble(position.dx, position.dy, 0, 1);
+    }
 
     matrix.rotateZ(angle);
 
-    if (scale != null) matrix.scale(scale);
+    if (scale != null) {
+      matrix.scaleByDouble(scale, scale, scale, 1);
+    }
 
     return matrix;
   }
