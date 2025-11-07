@@ -53,8 +53,8 @@ class _ExamplePageState extends State<ExamplePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 400,
                 width: 300,
+                height: 400,
                 child: CardStackSwiper(
                   controller: _controller,
                   cardsCount: _cards.length,

@@ -22,9 +22,9 @@ We built this package because we wanted to:
 
 ## Show Cases
 
-| Swipe in any direction                                                                                                             | Programmatic Swipes | Undo a Swipe |
-|------------------------------------------------------------------------------------------------------------------------------------| :------------- | :---------------- |
-| <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/swipe_in_any_direction.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/trigger_swipes.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/unswipe_the_cards.gif?raw=true" height="275" /> 
+| Swipe in any direction                                                                                                             | Programmatic Swipes                                                                                                        | Undo a Swipe                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/swipe_in_any_direction.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/trigger_swipes.gif?raw=true" height="275" /> | <img src="https://github.com/Politanskyi/card_stack_swiper/blob/master/images/unswipe_the_cards.gif?raw=true" height="275" /> |
 
 ## Installation
 
@@ -80,8 +80,8 @@ class _ExamplePageState extends State<ExamplePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 400,
               width: 300,
+              height: 400,
               child: CardStackSwiper(
                 controller: _controller,
                 cardsCount: _cards.length,
@@ -123,29 +123,29 @@ class _ExamplePageState extends State<ExamplePage> {
 
 ## Constructor Parameters
 
-| Parameter                           | Default                       | Description                                                                                                   | Required |
-| ----------------------------------- |:------------------------------| :------------------------------------------------------------------------------------------------------------ | :------: |
-| `cardBuilder`                       | -                             | A builder function that creates a widget for a given card index.                                              |   Yes    |
-| `cardsCount`                        | -                             | The total number of cards in the stack.                                                                       |   Yes    |
-| `controller`                        | -                             | The controller used to programmatically control the swiper.                                                   |    No    |
-| `initialIndex`                      | `0`                           | The index of the card to display initially.                                                                   |    No    |
-| `isDisabled`                        | `false`                       | If `true`, swiping by user gesture is disabled.                                                               |    No    |
-| `onTapDisabled`                     | -                             | Callback function that is called when the swiper is tapped while disabled.                                    |    No    |
-| `onPressed`                         | -                             | Callback function that is called when a card is tapped.                                                       |    No    |
-| `onSwipe`                           | -                             | A callback to validate a swipe action. The swipe is cancelled if it returns `false`.                          |    No    |
-| `onUndo`                            | -                             | A callback to validate an undo action. The action is cancelled if it returns `false`.                         |    No    |
-| `onSwipeDirectionChange`            | -                             | A callback that is triggered in real-time as the user drags a card.                                           |    No    |
-| `onEnd`                             | -                             | A callback that is executed when the last card in a non-looping stack is swiped.                              |    No    |
-| `isLoop`                            | `true`                        | Whether the stack should loop after the last card.                                                            |    No    |
-| `maxAngle`                          | `20`                          | The maximum angle the card reaches while swiping, in degrees.                                                 |    No    |
-| `threshold`                         | `30`                          | The percentage of the screen width from which the card is swiped away.                                        |    No    |
-| `backCardOffset`                    | `Offset(60, 0)`               | The offset of the back cards from the front card.                                                             |    No    |
-| `backCardAngle`                     | `0.1`                         | The angle of the back cards, in radians.                                                                      |    No    |
-| `backCardScale`                     | `0.8`                         | The scale of the back cards.                                                                                  |    No    |
-| `allowedSwipeDirection`             | `AllowedSwipeDirection.all()` | Defines the directions in which the card is allowed to be swiped.                                             |    No    |
-| `swipeAnimationDuration`            | `Duration(milliseconds: 300)` | The duration of the swipe animation.                                                                          |    No    |
-| `returnAnimationDuration`           | `Duration(milliseconds: 400)` | The duration of the animation when a card returns to the center.                                              |    No    |
-| `verticalSwipeThresholdMultiplier`  | `0.8`                         | A multiplier to adjust the sensitivity of the vertical swipe.                                                 |    No    |
+| Parameter                          | Default                       | Description                                                                           | Required |
+| ---------------------------------- | :---------------------------- | :------------------------------------------------------------------------------------ | :------: |
+| `cardBuilder`                      | -                             | A builder function that creates a widget for a given card index.                      |   Yes    |
+| `cardsCount`                       | -                             | The total number of cards in the stack.                                               |   Yes    |
+| `controller`                       | -                             | The controller used to programmatically control the swiper.                           |    No    |
+| `initialIndex`                     | `0`                           | The index of the card to display initially.                                           |    No    |
+| `isDisabled`                       | `false`                       | If `true`, swiping by user gesture is disabled.                                       |    No    |
+| `onTapDisabled`                    | -                             | Callback function that is called when the swiper is tapped while disabled.            |    No    |
+| `onPressed`                        | -                             | Callback function that is called when a card is tapped.                               |    No    |
+| `onSwipe`                          | -                             | A callback to validate a swipe action. The swipe is cancelled if it returns `false`.  |    No    |
+| `onUndo`                           | -                             | A callback to validate an undo action. The action is cancelled if it returns `false`. |    No    |
+| `onSwipeDirectionChange`           | -                             | A callback that is triggered in real-time as the user drags a card.                   |    No    |
+| `onEnd`                            | -                             | A callback that is executed when the last card in a non-looping stack is swiped.      |    No    |
+| `isLoop`                           | `true`                        | Whether the stack should loop after the last card.                                    |    No    |
+| `maxAngle`                         | `20`                          | The maximum angle the card reaches while swiping, in degrees.                         |    No    |
+| `threshold`                        | `30`                          | The percentage of the screen width from which the card is swiped away.                |    No    |
+| `backCardOffset`                   | `Offset(60, 0)`               | The offset of the back cards from the front card.                                     |    No    |
+| `backCardAngle`                    | `0.1`                         | The angle of the back cards, in radians.                                              |    No    |
+| `backCardScale`                    | `0.8`                         | The scale of the back cards.                                                          |    No    |
+| `allowedSwipeDirection`            | `AllowedSwipeDirection.all()` | Defines the directions in which the card is allowed to be swiped.                     |    No    |
+| `swipeAnimationDuration`           | `Duration(milliseconds: 300)` | The duration of the swipe animation.                                                  |    No    |
+| `returnAnimationDuration`          | `Duration(milliseconds: 400)` | The duration of the animation when a card returns to the center.                      |    No    |
+| `verticalSwipeThresholdMultiplier` | `0.8`                         | A multiplier to adjust the sensitivity of the vertical swipe.                         |    No    |
 
 ## Controller API
 
