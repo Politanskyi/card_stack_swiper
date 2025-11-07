@@ -32,7 +32,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  card_stack_swiper: ^1.0.2
+  card_stack_swiper: ^1.0.3
 ```
 
 **OR** run this command in your project's root directory:

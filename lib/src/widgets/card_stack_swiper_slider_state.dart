@@ -4,9 +4,9 @@ class _CardStackSwiperState extends State<CardStackSwiper>
     with TickerProviderStateMixin {
   final Queue<CardStackSwiperDirection> _directionHistory = Queue();
 
-  late final Map<CardStackSwiperStatus, CardSettings> _sliderSettings;
   late final CardAnimation _sliderAnimation;
 
+  late Map<CardStackSwiperStatus, CardSettings> _sliderSettings;
   late AnimationController _animationController;
   late Undoable<int?> _undoableIndex;
 

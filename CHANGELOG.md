@@ -1,3 +1,9 @@
+## [1.0.3]
+
+### Changed
+- Updated version to 1.0.3 in `pubspec.yaml`.
+- Improved slider settings update logic in `card_stack_swiper_slider_state.dart` to properly handle widget property changes.
+
 ## [1.0.2]
 
 ### Changed
