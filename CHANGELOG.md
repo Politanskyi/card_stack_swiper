@@ -1,4 +1,4 @@
-## [1.1.0]
+## [1.1.1]
 
 ### Added
 - `emptyCardBuilder` parameter to display custom widget when all cards are swiped and `isLoop` is false
