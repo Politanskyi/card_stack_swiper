@@ -54,23 +54,40 @@ class _ExamplePageState extends State<ExamplePage> {
             children: [
               SizedBox(
                 width: 300,
-                height: 400,
-                child: CardStackSwiper(
-                  controller: _controller,
-                  cardsCount: _cards.length,
-                  initialIndex: 0,
-                  isLoop: true,
-                  onSwipe: (previousIndex, currentIndex, direction) {
-                    debugPrint(
-                        'Swiped from $previousIndex to $currentIndex in $direction direction');
-                    return true;
-                  },
-                  onEnd: () {
-                    debugPrint('Reached end of the stack');
-                  },
-                  cardBuilder: (context, index, horizontalPercentage,
-                          verticalPercentage) =>
-                      _cards[index],
+                child: AspectRatio(
+                  aspectRatio: 3 / 4,
+                  child: CardStackSwiper(
+                      controller: _controller,
+                      cardsCount: _cards.length,
+                      initialIndex: 0,
+                      isLoop: false,
+                      onSwipe: (previousIndex, currentIndex, direction) {
+                        debugPrint(
+                          'Swiped from $previousIndex to $currentIndex in $direction direction',
+                        );
+                        return true;
+                      },
+                      onEnd: () {
+                        debugPrint('Reached end of the stack');
+                      },
+                      cardBuilder: (context, index, horizontalPercentage,
+                              verticalPercentage) =>
+                          _cards[index],
+                      emptyCardBuilder: (context) => Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            color: Colors.grey,
+                            child: Center(
+                              child: Text(
+                                'No more cards',
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          )),
                 ),
               ),
               const SizedBox(height: 20),
@@ -83,6 +100,12 @@ class _ExamplePageState extends State<ExamplePage> {
                     child: const Icon(Icons.rotate_left),
                   ),
                   FloatingActionButton(
+                    heroTag: 'top',
+                    onPressed: () =>
+                        _controller.swipe(CardStackSwiperDirection.top),
+                    child: const Icon(Icons.keyboard_arrow_up),
+                  ),
+                  FloatingActionButton(
                     heroTag: 'left',
                     onPressed: () =>
                         _controller.swipe(CardStackSwiperDirection.left),
@@ -93,6 +116,12 @@ class _ExamplePageState extends State<ExamplePage> {
                     onPressed: () =>
                         _controller.swipe(CardStackSwiperDirection.right),
                     child: const Icon(Icons.keyboard_arrow_right),
+                  ),
+                  FloatingActionButton(
+                    heroTag: 'bottom',
+                    onPressed: () =>
+                        _controller.swipe(CardStackSwiperDirection.bottom),
+                    child: const Icon(Icons.keyboard_arrow_down),
                   ),
                 ],
               )

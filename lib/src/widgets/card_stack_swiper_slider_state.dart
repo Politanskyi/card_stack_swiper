@@ -20,6 +20,13 @@ class _CardStackSwiperState extends State<CardStackSwiper>
   int? get _currentIndex => _undoableIndex.state;
   int get _cardsCount => widget.cardsCount;
   bool get _canSwipe => _currentIndex != null;
+  bool get _allCardsSwiped =>
+      _currentIndex == null ? _cardsCount > 0 : _currentIndex! >= _cardsCount;
+  bool get _shouldShowEmptyCard =>
+      _cardsCount > 0 &&
+      !widget.isLoop &&
+      widget.emptyCardBuilder != null &&
+      _allCardsSwiped;
 
   @override
   void initState() {
@@ -54,12 +61,18 @@ class _CardStackSwiperState extends State<CardStackSwiper>
     }
 
     if (widget.cardsCount != oldWidget.cardsCount) {
-      if (_currentIndex != null && _currentIndex! >= widget.cardsCount) {
+      final bool shouldReset = widget.isLoop || widget.emptyCardBuilder == null;
+      final bool isOutOfBounds =
+          _currentIndex != null && _currentIndex! >= widget.cardsCount;
+
+      if (shouldReset || isOutOfBounds) {
         setState(() {
-          _undoableIndex = Undoable(widget.initialIndex);
+          _undoableIndex = Undoable(shouldReset ? widget.initialIndex : null);
           _directionHistory.clear();
           _sliderAnimation.reset();
         });
+      } else {
+        setState(() {});
       }
     }
   }
@@ -369,25 +382,29 @@ class _CardStackSwiperState extends State<CardStackSwiper>
     return cards;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return AnimatedBuilder(
-          animation: _animationController,
-          builder: (context, _) {
-            return Stack(
-              clipBehavior: Clip.none,
-              fit: StackFit.expand,
-              alignment: Alignment.center,
-              children: [
-                ..._buildBackCards(constraints),
-                _buildFrontCard(constraints),
-              ],
-            );
-          },
+  Widget _buildCardStack(BoxConstraints constraints) {
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, _) {
+        return Stack(
+          clipBehavior: Clip.none,
+          fit: StackFit.expand,
+          alignment: Alignment.center,
+          children: [
+            ..._buildBackCards(constraints),
+            _buildFrontCard(constraints),
+          ],
         );
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CardStackSwiperContent(
+      emptyCardBuilder: widget.emptyCardBuilder,
+      shouldShowEmptyCard: _shouldShowEmptyCard,
+      cardStackBuilder: _buildCardStack,
     );
   }
 
