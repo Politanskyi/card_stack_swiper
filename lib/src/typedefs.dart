@@ -14,6 +14,12 @@ typedef CardStackSwiperBuilder = Widget? Function(
   int verticalOffsetPercentage,
 );
 
+/// A builder function that creates a widget to display when all cards have been swiped
+/// and [isLoop] is false. The [context] is passed to the builder.
+typedef CardStackSwiperEmptyCardBuilder = Widget Function(
+  BuildContext context,
+);
+
 /// A callback that is triggered in real-time as the user drags a card.
 /// It provides the current inferred [horizontal] and [vertical] swipe directions.
 typedef CardStackSwiperDirectionChange = void Function(

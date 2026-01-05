@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
+import 'package:card_stack_swiper/src/widgets/card_stack_swiper_content.dart';
 import 'package:flutter/material.dart';
 
 import '../controller/card_stack_swiper_controller.dart';
@@ -24,6 +25,7 @@ class CardStackSwiper extends StatefulWidget {
     super.key,
     required this.cardBuilder,
     required this.cardsCount,
+    this.emptyCardBuilder,
     this.controller,
     this.initialIndex = 0,
     this.isDisabled = false,
@@ -55,6 +57,9 @@ class CardStackSwiper extends StatefulWidget {
 
   /// The total number of cards in the stack.
   final int cardsCount;
+
+  /// Function that builds a widget to display when all cards are swiped and isLoop is false.
+  final CardStackSwiperEmptyCardBuilder? emptyCardBuilder;
 
   /// The controller used to programmatically control the swiper.
   /// If `null`, the swiper can only be controlled by user gestures.

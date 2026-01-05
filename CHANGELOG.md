@@ -1,3 +1,33 @@
+## [1.1.0]
+
+### Added
+- `emptyCardBuilder` parameter to display custom widget when all cards are swiped and `isLoop` is false
+- `CardStackSwiperEmptyCardBuilder` typedef for building empty state widget
+- Smooth animated transition between card stack and empty state using `AnimatedSwitcher`
+- Comprehensive test suite with 45 tests covering all plugin functionality
+- Unit tests for `Undoable` utility class
+- Unit tests for `AllowedSwipeDirection` configuration class
+- Unit and widget tests for `CardStackSwiperController`
+- Widget tests for main `CardStackSwiper` functionality
+- Test helpers for card building, finders, gestures, and app pumping
+- Tests for new `emptyCardBuilder` functionality
+
+### Changed
+- Updated `_allCardsSwiped` logic to properly handle `null` index state
+- Modified `didUpdateWidget` logic to preserve index state when `emptyCardBuilder` is used
+- Improved state management for end-of-stack scenarios
+- Refactored `CardStackSwiperContent` widget to encapsulate `AnimatedSwitcher` logic
+- Enhanced test coverage from basic functionality to comprehensive API testing
+- Optimized test structure to work with CardStackSwiper's multi-card display architecture
+
+### Fixed
+- Fixed empty state not displaying when all cards are swiped with `isLoop` disabled
+- Resolved index reset issue that prevented empty card builder from showing
+- Fixed controller widget tests to use `pumpAndSettle()` for proper animation handling
+- Corrected test assertions to handle CardStackSwiper's multiple card display structure
+- Resolved lint warnings including unused variables and print statements
+- Fixed test helper imports and gesture implementations
+
 ## [1.0.3]
 
 ### Changed
