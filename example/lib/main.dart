@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:card_stack_swiper/card_stack_swiper.dart';
 
 void main() {

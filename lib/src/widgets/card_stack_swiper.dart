@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:card_stack_swiper/src/widgets/card_stack_swiper_content.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../controller/card_stack_swiper_controller.dart';
 import '../controller/controller_event.dart';

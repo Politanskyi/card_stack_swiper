@@ -1,3 +1,16 @@
+## [1.2.0]
+
+### Breaking changes
+
+- Requires Flutter 3.44+ and Dart 3.12+.
+- Replaces `package:flutter/material.dart` with `package:material_ui`.
+  Apps still on SDK Material must migrate or wrap this widget with
+  `MaterialUiCompatibilityBridge`.
+
+### Changed
+
+- Library, tests, and example now import `package:material_ui/material_ui.dart`.
+
 ## [1.1.2]
 
 ### Fixed

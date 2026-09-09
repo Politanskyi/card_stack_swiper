@@ -6,15 +6,16 @@ homepage: https://github.com/Politanskyi/card_stack_swiper
 
 issue_tracker: https://github.com/Politanskyi/card_stack_swiper/issues
 
-version: 1.1.2
+version: 1.2.0
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
-  flutter: '>=3.10.0'
+  sdk: ^3.12.0
+  flutter: '>=3.44.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  material_ui: ^1.2.0
 
 dev_dependencies:
   flutter_test:

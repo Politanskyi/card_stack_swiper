@@ -32,7 +32,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  card_stack_swiper: ^1.1.2
+  card_stack_swiper: ^1.2.0
 ```
 
 **OR** run this command in your project's root directory:
@@ -46,7 +46,7 @@ flutter pub add card_stack_swiper
 Here is a basic example of how to use the `CardStackSwiper`.
 
 ```dart
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:card_stack_swiper/card_stack_swiper.dart';
 
 class ExamplePage extends StatefulWidget {
