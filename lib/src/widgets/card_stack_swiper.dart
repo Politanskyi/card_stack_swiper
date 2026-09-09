@@ -16,10 +16,12 @@ import 'card_stack_swiper_item.dart';
 
 part 'card_stack_swiper_slider_state.dart';
 
-/// A widget for creating a swipeable stack of cards, similar to a Tinder-style interface.
+/// A swipeable stack of cards with gesture and programmatic control.
 ///
-/// It allows you to swipe cards in multiple directions and define custom logic
-/// for each action. Features smooth animations and is highly customizable.
+/// Cards can be swiped left, right, up, or down. Callbacks let you accept or
+/// reject each swipe, undo, loop the stack, and drive it from
+/// [CardStackSwiperController]. Stack offset, scale, angle, and animation
+/// durations are configurable.
 class CardStackSwiper extends StatefulWidget {
   const CardStackSwiper({
     super.key,
